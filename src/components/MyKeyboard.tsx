@@ -3,7 +3,6 @@ import Button from "./Button";
 import { View, Text } from "react-native";
 import { Styles } from "../styles/GlobalStyles";
 import { myColors } from "../styles/Colors";
-import { MaterialIcons } from '@expo/vector-icons';
 
 export default function MyKeyboard() {
     const [firstNumber, setFirstNumber] = React.useState("");
@@ -31,11 +30,11 @@ export default function MyKeyboard() {
         switch (operation) {
             case "+":
                 clear();
-                setResult(parseInt(secondNumber) + parseInt(firstNumber));
+                setResult(Number(secondNumber) + Number(firstNumber));
                 break;
             case "-":
                 clear();
-                setResult(parseInt(secondNumber)- parseInt(firstNumber));
+                setResult(Number(secondNumber)- Number(firstNumber));
                 break;
             case "*":
                 clear();
@@ -44,6 +43,10 @@ export default function MyKeyboard() {
             case "/":
                 clear();
                 setResult(parseInt(secondNumber)/ parseInt(firstNumber));
+                break;
+            case "%":
+                clear();
+                setResult(parseInt(secondNumber)/100);
                 break;
             default:
                 clear();
@@ -99,7 +102,7 @@ export default function MyKeyboard() {
     <Button title="C" isGray onPress={clear} />
     <Button title="+/-" isGray onPress={() => handleOperationPress("+/-")} />
     <Button title="%" isGray onPress={() => handleOperationPress("%")} />
-    <Button title="/" isBlue onPress={() => handleOperationPress("/")} />
+    <Button title="÷" isBlue onPress={() => handleOperationPress("/")} />
 </View>
 <View style={Styles.row}>
     <Button title="7" onPress={() => handleNumberPress("7")} />
@@ -122,7 +125,7 @@ export default function MyKeyboard() {
 <View style={Styles.row}>
     <Button title="." onPress={() => handleNumberPress(".")} />
     <Button title="0" onPress={() => handleNumberPress("0")} />
-    <Button title={<MaterialIcons name="backspace" size={24}/>} onPress={() => setFirstNumber(firstNumber.slice(0, -1))} />
+    <Button title="⌫" onPress={() => setFirstNumber(firstNumber.slice(0, -1))} />
     <Button title="=" isBlue onPress={() => getResult()} />
 </View>
 </View>
